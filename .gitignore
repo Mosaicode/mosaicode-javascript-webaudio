@@ -2,3 +2,5 @@ build/
 dist/
 mosaicode_lib_javascript_webaudio.egg-info
 mosaicode_javascript_webaudio.egg-info/
+
+\.idea/

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mosaicode>
+ <version value="0.0.1"/>
+ <zoom value="1.0"/>
+ <language value="javascript"/>
+ <blocks>
+  <block id="1" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Comparation.modulus">
+   <position x="450.0" y="80.0"/>
+  </block>
+  <block id="4" type="mosaicode_lib_javascript_webaudio.extensions.blocks.GUI.print">
+   <position x="800.0" y="30.0"/>
+   <property key="label" value="If: "/>
+  </block>
+  <block id="5" type="mosaicode_lib_javascript_webaudio.extensions.blocks.GUI.print">
+   <position x="670.0" y="220.0"/>
+   <property key="label" value="Else: "/>
+  </block>
+  <block id="8" type="mosaicode_lib_javascript_webaudio.extensions.blocks.form.number">
+   <position x="40.0" y="20.0"/>
+   <property key="value" value="0.0"/>
+   <property key="label" value="Dividend: "/>
+   <property key="min" value="0.0"/>
+   <property key="max" value="100.0"/>
+  </block>
+  <block id="9" type="mosaicode_lib_javascript_webaudio.extensions.blocks.form.number">
+   <position x="30.0" y="150.0"/>
+   <property key="value" value="0.0"/>
+   <property key="label" value="Divisor: "/>
+   <property key="min" value="0.0"/>
+   <property key="max" value="100.0"/>
+  </block>
+  <block id="10" type="mosaicode_lib_javascript_webaudio.extensions.blocks.form.number">
+   <position x="50.0" y="260.0"/>
+   <property key="value" value="0.0"/>
+   <property key="label" value="Rest: "/>
+   <property key="min" value="0.0"/>
+   <property key="max" value="100.0"/>
+  </block>
+  <block id="11" type="mosaicode_lib_javascript_webaudio.extensions.blocks.form.text">
+   <position x="200.0" y="310.0"/>
+   <property key="value" value="OK"/>
+   <property key="label" value="True Value: "/>
+  </block>
+  <block id="12" type="mosaicode_lib_javascript_webaudio.extensions.blocks.form.text">
+   <position x="360.0" y="290.0"/>
+   <property key="value" value="NOK"/>
+   <property key="label" value="False Value: "/>
+  </block>
+ </blocks>
+ <connections>
+  <connection from_block="1" from_out="1" to_block="4" to_in="4"/>
+  <connection from_block="1" from_out="2" to_block="5" to_in="4"/>
+  <connection from_block="8" from_out="1" to_block="1" to_in="3"/>
+  <connection from_block="9" from_out="1" to_block="1" to_in="4"/>
+  <connection from_block="10" from_out="1" to_block="1" to_in="5"/>
+  <connection from_block="11" from_out="1" to_block="1" to_in="6"/>
+  <connection from_block="12" from_out="1" to_block="1" to_in="7"/>
+ </connections>
+</mosaicode>
