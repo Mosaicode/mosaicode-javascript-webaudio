@@ -1,0 +1,24 @@
+Metadata-Version: 1.2
+Name: mosaicode-javascript-webaudio
+Version: 1.2
+Summary: Code generation for Digital art
+Home-page: https://mosaicode.github.io
+Author: Bits & Beads Research Lab
+Author-email: mosaicode-dev@googlegroups.com
+Maintainer: Bits & Beads Research Lab
+Maintainer-email: mosaicode-dev@googlegroups.com
+License: GNU GPL3
+Download-URL: https://github.com/Mosaicode/mosaicode.git
+Description: UNKNOWN
+Keywords: VLP,Blocks,Code Generation,Digital art
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: GNU General Public License (GPL)
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: JavaScript
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Software Development :: Code Generators

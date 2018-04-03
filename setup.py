@@ -25,24 +25,26 @@ config['classifiers'] = [
 ]
 
 setup(name='mosaicode_javascript_webaudio',
-      install_requires=['Python>=2.7'],
+      install_requires=['mosaicode'],
       tests_require=[],
       test_suite='',
-      version='1.0',
+      version='1.2',
       packages=[
           'mosaicode_javascript_webaudio',
           'mosaicode_javascript_webaudio.extensions',
           'mosaicode_javascript_webaudio.extensions.webaudio',
           'mosaicode_javascript_webaudio.extensions.ports'],
       scripts=[],
-      description='Image Processing and Computer Vision \
-      Automatic Programming Tool',
-      author='Ouroboros',
-      author_email='',
-      maintainer="Ouroboros",
-      maintainer_email="",
+      description='Code generation for Digital art',
+      author='Bits & Beads Research Lab',
+      author_email='mosaicode-dev@googlegroups.com',
+      maintainer="Bits & Beads Research Lab",
+      maintainer_email="mosaicode-dev@googlegroups.com",
       license="GNU GPL3",
-      url='http://ges.dcomp.ufsj.edu.br/index.php/ouroboros/',
+
+      url='https://mosaicode.github.io', 
+      download_url = 'https://github.com/Mosaicode/mosaicode.git',
+      keywords = ['VLP', 'Blocks','Code Generation', 'Digital art'],  
 
       # this is fucked up! must put it in package_data!!
       data_files=[],
