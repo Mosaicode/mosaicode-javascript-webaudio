@@ -30,20 +30,20 @@ class UpKeyboard(BlockModel):
             ]
 
         self.codes["function"] = """
-var keyboard_char_output = [];
-var keyboard_float_output = [];
+var keyboard_char_output_up = [];
+var keyboard_float_output_up = [];
 document.onkeyup = function(evt){
     evt = evt || window.event;
 
     var value = evt.keyCode || evt.which;
-    for (var i = 0; i < keyboard_float_output.length ; i++)
-        for (var j = 0; j < keyboard_float_output[i].length ; j++)
-                keyboard_float_output[i][j](value);
+    for (var i = 0; i < keyboard_float_output_up.length ; i++)
+        for (var j = 0; j < keyboard_float_output_up[i].length ; j++)
+                keyboard_float_output_up[i][j](value);
 
     value = String.fromCharCode(value);
-    for (var i = 0; i < keyboard_char_output.length ; i++)
-        for (var j = 0; j < keyboard_char_output[i].length ; j++)
-                keyboard_char_output[i][j](value);
+    for (var i = 0; i < keyboard_char_output_up.length ; i++)
+        for (var j = 0; j < keyboard_char_output_up[i].length ; j++)
+                keyboard_char_output_up[i][j](value);
 };
 """
 
@@ -51,7 +51,7 @@ document.onkeyup = function(evt){
 // block_$id$ = KeyBoard Input
 var $port[char_output]$ = [];
 var $port[float_output]$ = [];
-keyboard_char_output.push($port[char_output]$);
-keyboard_float_output.push($port[float_output]$);
+keyboard_char_output_up.push($port[char_output]$);
+keyboard_float_output_up.push($port[float_output]$);
 """
 
