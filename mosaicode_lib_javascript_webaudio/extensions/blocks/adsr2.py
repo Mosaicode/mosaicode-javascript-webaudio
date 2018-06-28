@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-This module contains the ADSR class.
+This module contains the ADSR2 class.
 """
 from mosaicode.GUI.fieldtypes import *
 from mosaicode.model.blockmodel import BlockModel
 
 
-class ADSR(BlockModel):
+class ADSR2(BlockModel):
 
     # -------------------------------------------------------------------------
     def __init__(self):
@@ -15,8 +15,8 @@ class ADSR(BlockModel):
 
         self.language = "javascript"
         self.framework = "webaudio"
-        self.help = "ADSR"
-        self.label = "ADSR"
+        self.help = "ADSR2"
+        self.label = "ADSR2"
         self.color = "50:150:250:150"
 
         self.ports = [{"type": "mosaicode_lib_javascript_webaudio.extensions.ports.sound",
@@ -32,10 +32,6 @@ class ADSR(BlockModel):
                        "conn_type": "Input",
                        "name": "d"},
                       {"type": "mosaicode_lib_javascript_webaudio.extensions.ports.float",
-                       "label": "Sustain",
-                       "conn_type": "Input",
-                       "name": "s"},
-                      {"type": "mosaicode_lib_javascript_webaudio.extensions.ports.float",
                        "label": "Release",
                        "conn_type": "Input",
                        "name": "r"},
@@ -47,6 +43,10 @@ class ADSR(BlockModel):
                        "conn_type": "Input",
                        "label": "Event Play",
                        "name": "play"},
+                      {"type": "mosaicode_lib_javascript_webaudio.extensions.ports.float",
+                       "conn_type": "Input",
+                       "label": "Event Release",
+                       "name": "release"},
                       {"type": "mosaicode_lib_javascript_webaudio.extensions.ports.sound",
                        "label": "Output",
                        "conn_type": "Output",
@@ -72,14 +72,7 @@ class ADSR(BlockModel):
              "step": 1,
              "value": 20
              },
-            {"name": "s",
-             "label": "Sustain",
-             "type": MOSAICODE_FLOAT,
-             "lower": 0,
-             "upper": 10000,
-             "step": 1,
-             "value": 100
-             },
+
             {"name": "r",
              "label": "Release",
              "type": MOSAICODE_FLOAT,
@@ -99,58 +92,65 @@ class ADSR(BlockModel):
         ]
 
         self.codes["function"] = """
-Envelope = function(context, a, d, s, r, g) {
+Envelope2 = function(context, a, d, r, g) {
 this.node = context.createGain()
 this.context = context;
 this.node.gain.value = 0;
 this.a = a / 1000.0;
 this.d = d / 1000.0;
-this.s = s / 1000.0;
 this.r = r / 1000.0;
 this.g = g;
+this.event = "none";
+this.state = "none";
 }
 
-Envelope.prototype.play = function(e) {
-var time = this.context.currentTime;
-// Zero
-this.node.gain.linearRampToValueAtTime(0, time);
-// Attack time
-time += this.a;
-this.node.gain.linearRampToValueAtTime(1, time);
-// Decay time
-time += this.d;
-this.node.gain.linearRampToValueAtTime(this.g, time);
-// Sustain time (do nothing)
-time += this.s;
-// Release time
-time += this.r;
-this.node.gain.linearRampToValueAtTime(0, time);
+Envelope2.prototype.play = function(e) {
+
+if (this.event == "play"){
+    var time = this.context.currentTime;
+    // Zero
+    if (this.state == "none"){
+        this.node.gain.linearRampToValueAtTime(0, time);
+    }
+    // Attack time
+    time += this.a;
+    this.node.gain.linearRampToValueAtTime(1, time);
+    // Decay time
+    time += this.d;
+    this.node.gain.linearRampToValueAtTime(this.g, time);
+    this.state = "playing";
+    return;
+    }
+
+if (this.event == "release"){
+    var time = this.context.currentTime;
+    time += this.r;
+    this.node.gain.linearRampToValueAtTime(0, time);
+    this.event = "none";
+    this.state = "none";
+    }
 }
 
-Envelope.prototype.seta = function(a) {
+Envelope2.prototype.seta = function(a) {
     this.a = parseFloat(a)/1000.0;
 }
 
-Envelope.prototype.setd = function(d) {
+Envelope2.prototype.setd = function(d) {
     this.d = parseFloat(d)/1000.0;
 }
 
-Envelope.prototype.sets = function(s) {
-    this.s = parseFloat(s)/1000.0;
-}
-
-Envelope.prototype.setr = function(r) {
+Envelope2.prototype.setr = function(r) {
     this.r = parseFloat(r)/1000.0;
 }
 
-Envelope.prototype.setg = function(g) {
+Envelope2.prototype.setg = function(g) {
     this.g = parseFloat(g);
 }
 """
         self.codes["declaration"] = """
 // block_$id$ = $label$
 
-var block_$id$_obj = new Envelope(context, $prop[a]$, $prop[d]$, $prop[s]$, $prop[r]$, $prop[g]$);
+var block_$id$_obj = new Envelope2(context, $prop[a]$, $prop[d]$, $prop[r]$, $prop[g]$);
 var $port[input]$ = block_$id$_obj.node;
 var $port[output]$ = block_$id$_obj.node;
 
@@ -160,10 +160,6 @@ var $port[a]$ = function(value){
 
 var $port[d]$ = function(value){
     block_$id$_obj.setd(value);
-};
-
-var $port[s]$ = function(value){
-    block_$id$_obj.sets(value);
 };
 
 var $port[r]$ = function(value){
@@ -176,6 +172,14 @@ var $port[g]$ = function(value){
 
 var $port[play]$ = function(value){
     if (value != 0) {
+        block_$id$_obj.event = "play";
+        block_$id$_obj.play();
+    }
+};
+
+var $port[release]$ = function(value){
+    if (value != 0) {
+        block_$id$_obj.event = "release";
         block_$id$_obj.play();
     }
 };
