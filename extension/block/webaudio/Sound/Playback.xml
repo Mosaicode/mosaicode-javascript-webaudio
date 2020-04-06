@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="150:150:250:150" extension="webaudio" group="Sound" help="Playback" label="Playback" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Sound.playback">
+ <onload value=""/>
+ <execution value='
+function handleFile_$id$() {
+    var input_pb_$id$ = document.getElementById("pb_$id$");
+    input_pb_$id$.addEventListener("change", handleFile_$id$, false);
+
+    var reader = new FileReader();
+    reader.onload = function(ev) {
+          context.decodeAudioData(ev.target.result, function(buffer) {
+                   block_$id$.buffer = buffer;
+                   block_$id$.loop = ("$prop[loop]$" == "True");
+          });
+    };
+    reader.readAsArrayBuffer(input_pb_$id$.files[0]);
+
+    $port[output]$.start();
+}
+'/>
+ <html value='
+$prop[label]$ &lt;input type="file" id="pb_$id$" onchange="handleFile_$id$(this.files)"&gt;
+'/>
+ <declaration value="
+var block_$id$ = context.createBufferSource();
+var $port[output]$ = block_$id$;
+"/>
+ <properties>
+  <property value="{'type': 'Check', 'name': 'loop', 'value': 'True', 'label': 'Loop'}"/>
+  <property value="{'type': 'String', 'name': 'label', 'value': 'Playback', 'label': 'Label'}"/>
+ </properties>
+ <ports>
+  <port conn_type="output" label="Output" name_="output" type_="mosaicode_lib_javascript_webaudio.extensions.ports.sound"/>
+ </ports>
+</MosaicodeBlock>

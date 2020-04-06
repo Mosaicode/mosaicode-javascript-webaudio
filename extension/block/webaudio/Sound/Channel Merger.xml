@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="50:150:250:150" extension="webaudio" group="Sound" help="Channel Merger" label="Channel Merger" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Sound.channelmerger">
+ <function value="
+Merger = function(context) {
+  var that = this;
+  this.x = 0; // Initial sample number
+  this.context = context;
+  this.node = context.createScriptProcessor(1024, 1, 1);
+  this.node.onaudioprocess = function(e) { that.process(e) };
+}
+
+Merger.prototype.process = function(e) {
+  var in1 = e.inputBuffer.getChannelData(0);
+  var out = e.outputBuffer.getChannelData(0);
+  for (var i = 0; i &lt; in1.length; ++i) {
+      out[i] = in1[i];
+  }
+}
+"/>
+ <declaration value="
+// block_$id$ = Channel Merger
+var block_$id$_obj = new Merger(context);
+var $port[sound_output]$ = block_$id$_obj.node;
+var $port[sound_input_1]$ = block_$id$_obj.node;
+var $port[sound_input_2]$ = block_$id$_obj.node;
+"/>
+ <properties/>
+ <ports>
+  <port conn_type="input" label="Sound Input 1" name_="sound_input_1" type_="mosaicode_lib_javascript_webaudio.extensions.ports.sound"/>
+  <port conn_type="input" label="Sound Input 2" name_="sound_input_2" type_="mosaicode_lib_javascript_webaudio.extensions.ports.sound"/>
+  <port conn_type="output" label="Sound Output" name_="sound_output" type_="mosaicode_lib_javascript_webaudio.extensions.ports.sound"/>
+ </ports>
+</MosaicodeBlock>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="50:150:250:150" extension="webaudio" group="Sound" help="ADSR2" label="ADSR2" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Sound.adsr2">
+ <function value='
+Envelope2 = function(context, a, d, r, g) {
+this.node = context.createGain()
+this.context = context;
+this.node.gain.value = 0;
+this.a = a / 1000.0;
+this.d = d / 1000.0;
+this.r = r / 1000.0;
+this.g = g;
+this.event = "none";
+this.state = "none";
+}
+
+Envelope2.prototype.play = function(e) {
+
+if (this.event == "play"){
+    var time = this.context.currentTime;
+    // Zero
+    if (this.state == "none"){
+        this.node.gain.linearRampToValueAtTime(0, time);
+    }
+    // Attack time
+    time += this.a;
+    this.node.gain.linearRampToValueAtTime(1, time);
+    // Decay time
+    time += this.d;
+    this.node.gain.linearRampToValueAtTime(this.g, time);
+    this.state = "playing";
+    return;
+    }
+
+if (this.event == "release"){
+    var time = this.context.currentTime;
+    time += this.r;
+    this.node.gain.linearRampToValueAtTime(0, time);
+    this.event = "none";
+    this.state = "none";
+    }
+}
+
+Envelope2.prototype.seta = function(a) {
+    this.a = parseFloat(a)/1000.0;
+}
+
+Envelope2.prototype.setd = function(d) {
+    this.d = parseFloat(d)/1000.0;
+}
+
+Envelope2.prototype.setr = function(r) {
+    this.r = parseFloat(r)/1000.0;
+}
+
+Envelope2.prototype.setg = function(g) {
+    this.g = parseFloat(g);
+}
+'/>
+ <declaration value='
+// block_$id$ = $label$
+
+var block_$id$_obj = new Envelope2(context, $prop[a]$, $prop[d]$, $prop[r]$, $prop[g]$);
+var $port[input]$ = block_$id$_obj.node;
+var $port[output]$ = block_$id$_obj.node;
+
+var $port[a]$ = function(value){
+    block_$id$_obj.seta(value);
+};
+
+var $port[d]$ = function(value){
+    block_$id$_obj.setd(value);
+};
+
+var $port[r]$ = function(value){
+    block_$id$_obj.setr(value);
+};
+
+var $port[g]$ = function(value){
+    block_$id$_obj.setg(value);
+};
+
+var $port[play]$ = function(value){
+    if (value != 0) {
+        block_$id$_obj.event = "play";
+        block_$id$_obj.play();
+    }
+};
+
+var $port[release]$ = function(value){
+    if (value != 0) {
+        block_$id$_obj.event = "release";
+        block_$id$_obj.play();
+    }
+};
+'/>
+ <properties>
+  <property value="{'upper': 10000, 'lower': 0, 'name': 'a', 'value': 200, 'label': 'Attack', 'step': 1, 'type': 'Float'}"/>
+  <property value="{'upper': 10000, 'lower': 0, 'name': 'd', 'value': 20, 'label': 'Decay', 'step': 1, 'type': 'Float'}"/>
+  <property value="{'upper': 10000, 'lower': 0, 'name': 'r', 'value': 50, 'label': 'Release', 'step': 1, 'type': 'Float'}"/>
+  <property value="{'upper': 10000, 'lower': 0, 'name': 'g', 'value': 0.8, 'label': 'Gain', 'step': 1, 'type': 'Float'}"/>
+ </properties>
+ <ports>
+  <port conn_type="input" label="Input" name_="input" type_="mosaicode_lib_javascript_webaudio.extensions.ports.sound"/>
+  <port conn_type="input" label="Attack" name_="a" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="input" label="Decay" name_="d" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="input" label="Release" name_="r" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="input" label="Gain" name_="g" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="input" label="Event Play" name_="play" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="input" label="Event Release" name_="release" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="output" label="Output" name_="output" type_="mosaicode_lib_javascript_webaudio.extensions.ports.sound"/>
+ </ports>
+</MosaicodeBlock>

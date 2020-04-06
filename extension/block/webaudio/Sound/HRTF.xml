@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="50:150:250:150" extension="webaudio" group="Sound" help="HRTF" label="HRTF" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Sound.hrtf">
+ <declaration value="
+// block_$id$ = $label$
+var block_$id$_width = window.innerWidth;
+var block_$id$_height = window.innerHeight;
+var block_$id$_xPos = Math.floor(block_$id$_width/2);
+var block_$id$_yPos = Math.floor(block_$id$_height/2);
+var block_$id$_zPos = 295;
+var block_$id$ = context.createPanner();
+
+block_$id$.panningModel = 'HRTF';
+block_$id$.distanceModel = &quot;$prop[distance_model]$&quot;;
+block_$id$.refDistance = $prop[ref_distance]$;
+block_$id$.maxDistance = $prop[max_distance]$;
+block_$id$.rolloffFactor = $prop[rolloff_factor]$;
+block_$id$.coneInnerAngle = $prop[cone_inner_angle]$;
+block_$id$.coneOuterAngle = $prop[cone_outer_angle]$;
+block_$id$.coneOuterGain = $prop[cone_outer_gain]$;
+
+var block_$id$_panner_pos = [0, 0, 0];
+var block_$id$_listener_pos = [0, 0, 0];
+var block_$id$_panner_orientation = [0, 0, 0];
+var block_$id$_listener_forward = [0, 0, 0];
+var block_$id$_listener_up = [0, 0, 0];
+
+
+var $port[panner_pos]$ = function(value){
+    block_$id$_panner_pos = value;
+    block_$id$.setPosition(value[0],
+                           value[1],
+                           value[2]);
+    return true;
+};
+var $port[listener_pos]$ = function(value){
+    block_$id$_listener_pos = value;
+    context.listener.setPosition(value[0],
+                                 value[1],
+                                 value[2]);
+    return true;
+};
+var $port[panner_orientation]$ = function(value){
+    block_$id$_panner_orientation = value;
+    block_$id$.setOrientation(value[0],
+                              value[1],
+                              value[2]);
+    return true;
+};
+var $port[listener_forward]$ = function(value){
+    block_$id$_listener_forward = value;
+    context.listener.setOrientation(value[0],
+                                    value[1],
+                                    value[2],
+                                    block_$id$_listener_up[0],
+                                    block_$id$_listener_up[1],
+                                    block_$id$_listener_up[2]);
+    return true;
+};
+
+var $port[listener_up]$ = function(value){
+    block_$id$_listener_up = value;
+    context.listener.setOrientation(block_$id$_listener_forward[0],
+                                    block_$id$_listener_forward[1],
+                                    block_$id$_listener_forward[2],
+                                    value[0],
+                                    value[1],
+                                    value[2]);
+    return true;
+};
+
+var $port[sound_input]$ = block_$id$;
+var $port[output]$ = block_$id$;
+"/>
+ <properties>
+  <property value="{'values': ['linear', 'inverse', 'exponential'], 'type': 'Combo', 'name': 'distance_model', 'value': 'inverse', 'label': 'Distance Model'}"/>
+  <property value="{'upper': 360, 'lower': 0, 'name': 'cone_inner_angle', 'value': 360, 'label': 'coneInnerAngle', 'type': 'Float'}"/>
+  <property value="{'upper': 360, 'lower': 0, 'name': 'cone_outer_angle', 'value': 0, 'label': 'Cone Outer Angle', 'type': 'Float'}"/>
+  <property value="{'upper': 32000, 'lower': 0, 'name': 'cone_outer_gain', 'value': 0, 'label': 'Cone Outer Gain', 'type': 'Float'}"/>
+  <property value="{'upper': 32000, 'lower': 0, 'name': 'ref_distance', 'value': 1, 'label': 'Ref Distance', 'type': 'Float'}"/>
+  <property value="{'upper': 32000, 'lower': 0, 'name': 'max_distance', 'value': 10000, 'label': 'Max Distance', 'type': 'Float'}"/>
+  <property value="{'upper': 32000, 'lower': 0, 'name': 'rolloff_factor', 'value': 1, 'label': 'Rolloff Factor', 'type': 'Float'}"/>
+ </properties>
+ <ports>
+  <port conn_type="input" label="Sound" name_="sound_input" type_="mosaicode_lib_javascript_webaudio.extensions.ports.sound"/>
+  <port conn_type="input" label="Panner Position" name_="panner_pos" type_="mosaicode_lib_javascript_webaudio.extensions.ports.point"/>
+  <port conn_type="input" label="Listener Position" name_="listener_pos" type_="mosaicode_lib_javascript_webaudio.extensions.ports.point"/>
+  <port conn_type="input" label="Panner Orientation" name_="panner_orientation" type_="mosaicode_lib_javascript_webaudio.extensions.ports.point"/>
+  <port conn_type="input" label="Listener Forward" name_="listener_forward" type_="mosaicode_lib_javascript_webaudio.extensions.ports.point"/>
+  <port conn_type="input" label="Listener Up" name_="listener_up" type_="mosaicode_lib_javascript_webaudio.extensions.ports.point"/>
+  <port conn_type="output" label="Sound" name_="output" type_="mosaicode_lib_javascript_webaudio.extensions.ports.sound"/>
+ </ports>
+</MosaicodeBlock>

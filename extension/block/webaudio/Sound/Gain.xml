@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="50:150:250:150" extension="webaudio" group="Sound" help="Sound output" label="Gain" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Sound.gain">
+ <execution value="block_$id$.gain.value = $prop[gain]$;
+"/>
+ <declaration value="
+// block_$id$ = $label$
+var block_$id$ = context.createGain();
+var $port[input]$ = block_$id$;
+var $port[output]$ = block_$id$;
+var $port[gain]$ = block_$id$.gain;
+var $port[gain_value]$ = function(value){
+    block_$id$.gain.value = value;
+    };
+"/>
+ <properties>
+  <property value="{'upper': 32000, 'lower': 0, 'name': 'gain', 'value': 1, 'label': 'Gain', 'type': 'Float'}"/>
+ </properties>
+ <ports>
+  <port conn_type="input" label="Input" name_="input" type_="mosaicode_lib_javascript_webaudio.extensions.ports.sound"/>
+  <port conn_type="input" label="Gain" name_="gain" type_="mosaicode_lib_javascript_webaudio.extensions.ports.sound"/>
+  <port conn_type="input" label="Gain Value" name_="gain_value" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="output" label="Output" name_="output" type_="mosaicode_lib_javascript_webaudio.extensions.ports.sound"/>
+ </ports>
+</MosaicodeBlock>

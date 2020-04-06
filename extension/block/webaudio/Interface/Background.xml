@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="50:150:0:150" extension="webaudio" group="Interface" help="Change Background color" label="Background" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Interface.background">
+ <onload value="
+$port[rgb]$('$prop[color]$');
+
+"/>
+ <declaration value="
+var $port[rgb]$ = function(value){
+    document.body.style.backgroundColor = value;
+    return true;
+    };
+"/>
+ <properties>
+  <property value="{'format': 'FF00FF', 'type': 'Color', 'name': 'color', 'value': '#F00', 'label': 'Color'}"/>
+ </properties>
+ <ports>
+  <port conn_type="input" label="RGB COlor" name_="rgb" type_="mosaicode_lib_javascript_webaudio.extensions.ports.color"/>
+ </ports>
+</MosaicodeBlock>

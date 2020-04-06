@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="163:01:01:150" extension="webaudio" group="Arithmetic Operations" help="Greater Than Or Equals (&gt;=)" label="Greater Than Or Equals" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Arithmetic Operations.greaterthanorequals">
+ <onload value="
+"/>
+ <execution value="
+"/>
+ <declaration value="
+var statement_1$id$ = null;
+var statement_2$id$ = null;
+
+var $port[output]$ = [];
+
+function greaterThanOrEquals$id$() {
+    var ret = statement_1$id$ &gt;= statement_2$id$;
+    for (var i = 0; i &lt; $port[output]$.length ; i++){
+        $port[output]$[i](ret);
+    }
+    return true;
+}
+
+var $port[statement_1]$ = function(value){
+    statement_1$id$ = Math.round(value);
+    greaterThanOrEquals$id$();
+    return true;
+};
+
+var $port[statement_2]$ = function(value){
+    statement_2$id$ = Math.round(value);
+    greaterThanOrEquals$id$();
+    return true;
+};
+"/>
+ <properties/>
+ <ports>
+  <port conn_type="input" label="Statement 1" name_="statement_1" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="input" label="Statement 2" name_="statement_2" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="output" label="Output" name_="output" type_="mosaicode_lib_javascript_webaudio.extensions.ports.bool"/>
+ </ports>
+</MosaicodeBlock>

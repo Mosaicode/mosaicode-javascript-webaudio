@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="50:150:250:150" extension="webaudio" group="Sound" help="Mul Sound" label="Mul Sound" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Sound.mulsound">
+ <function value="
+MulSound = function(context, analyzer0, analyzer1) {
+    var that = this;
+    this.analyzer0 = analyzer0;
+    this.analyzer1 = analyzer1;
+    this.context = context;
+    this.node = context.createScriptProcessor(1024, 1, 1);
+    this.node.onaudioprocess = function(e) {that.process(e)};
+}
+
+MulSound.prototype.process = function(e) {
+    var in0 = new Float32Array(this.analyzer0.fftSize);
+    var in1 = new Float32Array(this.analyzer1.fftSize);
+
+    this.analyzer0.getFloatTimeDomainData(in0);
+    this.analyzer1.getFloatTimeDomainData(in1);
+
+    var out = e.outputBuffer.getChannelData(0);
+    for (var i = 0; i &lt; in0.length; ++i) {
+        out[i] = in0[i] * in1[i];
+    }
+}
+"/>
+ <declaration value="
+// block_$id$ = $label$
+var block_$id$_in0 = context.createAnalyser();
+var block_$id$_in1 = context.createAnalyser();
+
+var $port[sound_input0]$ = block_$id$_in0;
+var $port[sound_input1]$ = block_$id$_in1;
+var block_$id$_obj = new MulSound(context, block_$id$_in0, block_$id$_in1);
+var $port[output]$ = block_$id$_obj.node;
+"/>
+ <properties/>
+ <ports>
+  <port conn_type="input" label="Sound" name_="sound_input0" type_="mosaicode_lib_javascript_webaudio.extensions.ports.sound"/>
+  <port conn_type="input" label="Input" name_="sound_input1" type_="mosaicode_lib_javascript_webaudio.extensions.ports.sound"/>
+  <port conn_type="output" label="Sound" name_="output" type_="mosaicode_lib_javascript_webaudio.extensions.ports.sound"/>
+ </ports>
+</MosaicodeBlock>

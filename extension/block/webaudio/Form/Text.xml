@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="50:150:250:150" extension="webaudio" group="Form" help="Text" label="Text" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Form.text">
+ <execution value='
+function enter_value$id$(e){
+    e = e || window.event;
+    if (e.keyCode != 13) //Ignore if it is not enter
+        return;
+    value = document.getElementById("block_$id$").value;
+    for (var i = 0; i &lt; $port[value]$.length ; i++){
+        $port[value]$[i](value);
+    }
+};
+'/>
+ <html value='
+$prop[label]$ &lt;input type="text" value="$prop[value]$" onkeypress="enter_value$id$(event);"
+id="block_$id$"&gt;&lt;br&gt;
+'/>
+ <declaration value='
+// block_$id$ = $label$
+var $port[value]$ = [];
+
+var $port[invalue]$ = function(value){
+    document.getElementById("block_$id$").value = value;
+    return true;
+    };
+
+'/>
+ <properties>
+  <property value="{'type': 'String', 'name': 'value', 'value': '', 'label': 'Value'}"/>
+  <property value="{'type': 'String', 'name': 'label', 'value': 'Label', 'label': 'Label'}"/>
+ </properties>
+ <ports>
+  <port conn_type="output" label="Value" name_="value" type_="mosaicode_lib_javascript_webaudio.extensions.ports.string"/>
+  <port conn_type="input" label="Value" name_="invalue" type_="mosaicode_lib_javascript_webaudio.extensions.ports.string"/>
+ </ports>
+</MosaicodeBlock>

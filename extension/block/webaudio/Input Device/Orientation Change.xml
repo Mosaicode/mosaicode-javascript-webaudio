@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="50:50:50:150" extension="webaudio" group="Input Device" help="Orientation Change" label="Orientation Change" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Input Devices.orientationchange">
+ <onload value="
+window.addEventListener('orientationchange', onOrientationChange$id$, false);
+                "/>
+ <execution value="
+onOrientationChange$id$();
+"/>
+ <declaration value="
+var $port[portrait]$ = [];
+var $port[landscape]$ = [];
+
+function onOrientationChange$id$(event){
+    var isPortrait = window.orientation % 180 === 0;
+    if (window.orientation % 180 === 0) {
+        for (var i = 0 ; i &lt; $port[portrait]$.length ; i++)
+            $port[portrait]$[i](isPortrait);
+            
+    } else {    
+        for (var i = 0 ; i &lt; $port[landscape]$.length ; i++)
+            $port[landscape]$[i](isPortrait);
+    }                
+}
+"/>
+ <properties/>
+ <ports>
+  <port conn_type="output" label="Portrait" name_="portrait" type_="mosaicode_lib_javascript_webaudio.extensions.ports.bool"/>
+  <port conn_type="output" label="Landscape" name_="landscape" type_="mosaicode_lib_javascript_webaudio.extensions.ports.bool"/>
+ </ports>
+</MosaicodeBlock>

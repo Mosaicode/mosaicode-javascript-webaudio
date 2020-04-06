@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="200:200:25:150" extension="webaudio" group="Conversion" help="Char to Float" label="Char 2 Float" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Conversion.char2float">
+ <declaration value="
+// block_$id$ = Char 2 Float
+var $port[float_output]$ = [];
+var $port[char_input]$ = function(value){
+    if (value != '$prop[char]$')
+        return true;
+    for (var i = 0; i &lt; $port[float_output]$.length ; i++){
+        $port[float_output]$[i]($prop[float]$);
+    }
+    return true;
+    };
+"/>
+ <properties>
+  <property value="{'upper': 20000, 'lower': 0, 'name': 'float', 'value': 60, 'label': 'Output float', 'step': 1, 'type': 'Float'}"/>
+  <property value="{'type': 'String', 'name': 'char', 'value': 'a', 'label': 'Input Char'}"/>
+ </properties>
+ <ports>
+  <port conn_type="input" label="Char Input" name_="char_input" type_="mosaicode_lib_javascript_webaudio.extensions.ports.char"/>
+  <port conn_type="output" label="Float Output" name_="float_output" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+ </ports>
+</MosaicodeBlock>

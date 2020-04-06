@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="200:200:25:150" extension="webaudio" group="Arithmetics" help="Multiply float values" label="Multiply Float" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Arithmetics.multiplyfloat">
+ <declaration value="
+// block_$id$ = Multiply Float
+var block_$id$_arg1 = 0;
+var block_$id$_arg2 = 0;
+var $port[result]$ = [];
+
+var $port[first_number]$ = function(value){
+    block_$id$_arg1 = parseFloat(value);
+    result = parseFloat(block_$id$_arg1) * parseFloat(block_$id$_arg2);
+    for (var i = 0; i &lt; $port[result]$.length ; i++){
+        $port[result]$[i](result);
+    }
+    return true;
+    };
+
+var $port[second_number]$ = function(value){
+    block_$id$_arg2 = parseFloat(value);
+    result = parseFloat(block_$id$_arg1) * parseFloat(block_$id$_arg2);
+    for (var i = 0; i &lt; $port[result]$.length ; i++){
+        $port[result]$[i](result);
+    }
+    return true;
+    };
+"/>
+ <properties/>
+ <ports>
+  <port conn_type="input" label="First Number" name_="first_number" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="input" label="Second Number" name_="second_number" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="output" label="Result" name_="result" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+ </ports>
+</MosaicodeBlock>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="150:150:250:150" extension="webaudio" group="Arithmetics" help="Increment" label="Increment" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Arithmetics.inc">
+ <declaration value="
+// block_$id$ = $label$
+var block_$id$_value = $prop[value]$;
+var block_$id$_step = $prop[step]$;
+var $port[float]$ = [];
+
+var $port[count]$ = function(value){
+    block_$id$_value += block_$id$_step;
+    for (var i = 0; i &lt; $port[float]$.length ; i++){
+        $port[float]$[i](block_$id$_value);
+    }
+    return true;
+    };
+
+var $port[value]$ = function(value){
+    block_$id$_value = value;
+    return true;
+    };
+
+"/>
+ <properties>
+  <property value="{'upper': 20000, 'lower': 0, 'name': 'value', 'value': 1, 'label': 'Value', 'step': 1, 'type': 'Float'}"/>
+  <property value="{'upper': 20000, 'lower': -20000, 'name': 'step', 'value': 1, 'label': 'Step', 'step': 1, 'type': 'Float'}"/>
+ </properties>
+ <ports>
+  <port conn_type="output" label="Float" name_="float" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="input" label="Count" name_="count" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="input" label="Value" name_="value" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+ </ports>
+</MosaicodeBlock>

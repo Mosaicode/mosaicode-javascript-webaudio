@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="150:50:150:150" extension="webaudio" group="Types" help="" label="String" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Types.string">
+ <onload value="
+load_string$id$();
+        "/>
+ <declaration value="
+var $port[string_value]$ = [];
+
+function load_string$id$(){
+    for (var i = 0 ; i &lt; $port[string_value]$.length ; i++)
+        $port[string_value]$[i]('$prop[string_value]$');
+};
+
+"/>
+ <properties>
+  <property value="{'type': 'String', 'name': 'string_value', 'value': '', 'label': 'Value'}"/>
+ </properties>
+ <ports>
+  <port conn_type="output" label="Value" name_="string_value" type_="mosaicode_lib_javascript_webaudio.extensions.ports.string"/>
+ </ports>
+</MosaicodeBlock>

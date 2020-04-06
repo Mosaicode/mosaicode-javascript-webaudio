@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodePort color="#0FF" hint="COLOR" language="javascript" multiple="True" type="mosaicode_lib_javascript_webaudio.extensions.ports.color" var_name="$block[label]$_$block[id]$_$port[name]$">
+ <code>
+  $output$.push($input$);
+ </code>
+</MosaicodePort>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="50:150:250:150" extension="webaudio" group="Form" help="Button" label="Button" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Form.button">
+ <execution value='
+function click$id$(){
+    value = document.getElementById("block_$id$").value;
+    for (var i = 0; i &lt; $port[click]$.length ; i++){
+        $port[click]$[i](value);
+    }
+};
+'/>
+ <html value='
+&lt;button type="button" value="$prop[value]$" onClick="click$id$();"
+id="block_$id$"&gt;$prop[label]$&lt;/button&gt;&lt;br&gt;
+'/>
+ <declaration value="
+// block_$id$ = $label$
+var block_$id$_value = $prop[value]$;
+var $port[click]$ = [];
+"/>
+ <properties>
+  <property value="{'upper': 20000, 'lower': 0, 'name': 'value', 'value': 1, 'label': 'Value', 'step': 1, 'type': 'Float'}"/>
+  <property value="{'type': 'String', 'name': 'label', 'value': 'Label', 'label': 'Label'}"/>
+ </properties>
+ <ports>
+  <port conn_type="output" label="Click" name_="click" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+ </ports>
+</MosaicodeBlock>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="50:150:250:150" extension="webaudio" group="Sound" help="Sound output" label="Oscillator" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Sound.oscillator">
+ <execution value="
+block_$id$.type = '$prop[type]$';
+block_$id$.frequency.value = $prop[freq]$; // value in hertz
+block_$id$.detune.value = 100; // value in cents
+block_$id$.start(0);
+"/>
+ <declaration value="
+// block_$id$ = Oscillator
+var block_$id$ =  context.createOscillator();
+var $port[osc_freq]$ = block_$id$.frequency;
+var $port[sound]$ = block_$id$;
+var $port[freq]$ = function(value){
+    block_$id$.frequency.value = value;
+};
+var $port[type]$ = function(value){
+    oscillator = ''
+    if (value &lt; 1) oscillator = 'square';
+    if (value == 1) oscillator = 'sine';
+    if (value == 2) oscillator = 'sawtooth';
+    if (value &gt; 2) oscillator = 'triangle';
+    block_$id$.type = oscillator;
+};
+"/>
+ <properties>
+  <property value="{'upper': 20000, 'lower': 0, 'name': 'freq', 'value': 440, 'label': 'Frequency', 'step': 1, 'type': 'Float'}"/>
+  <property value="{'values': ['square', 'sine', 'sawtooth', 'triangle'], 'type': 'Combo', 'name': 'type', 'value': 'sine', 'label': 'Type'}"/>
+ </properties>
+ <ports>
+  <port conn_type="input" label="Osc Frequency" name_="osc_freq" type_="mosaicode_lib_javascript_webaudio.extensions.ports.sound"/>
+  <port conn_type="input" label="Frequency" name_="freq" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="input" label="Type" name_="type" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="output" label="Sound" name_="sound" type_="mosaicode_lib_javascript_webaudio.extensions.ports.sound"/>
+ </ports>
+</MosaicodeBlock>

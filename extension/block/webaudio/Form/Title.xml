@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="50:150:250:150" extension="webaudio" group="Form" help="Window Title" label="Title" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Form.title">
+ <onload value="
+$port[title]$('$prop[title]$');
+
+        "/>
+ <declaration value="
+var $port[title]$ = function(value){
+    window.document.title = value;
+    return 1;
+}
+"/>
+ <properties>
+  <property value="{'type': 'String', 'name': 'title', 'value': 'Mosaicode - Document Title', 'label': 'Value'}"/>
+ </properties>
+ <ports>
+  <port conn_type="input" label="Value" name_="title" type_="mosaicode_lib_javascript_webaudio.extensions.ports.string"/>
+ </ports>
+</MosaicodeBlock>

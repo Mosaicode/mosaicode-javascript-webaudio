@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="50:150:250:150" extension="webaudio" group="Sound" help="White Noise" label="White Noise" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Sound.whitenoise">
+ <function value="
+WhiteNoise = function(context) {
+  var that = this;
+  this.x = 0; // Initial sample number
+  this.context = context;
+  this.node = context.createScriptProcessor(1024, 0, 2);
+  this.node.onaudioprocess = function(e) { that.process(e) };
+}
+
+WhiteNoise.prototype.process = function(e) {
+  var data_l = e.outputBuffer.getChannelData(0);
+  var data_r = e.outputBuffer.getChannelData(1);
+  for (var i = 0; i &lt; data_l.length; ++i) {
+//    data[i] = Math.sin(this.x++);
+      data_l[i] = (Math.random() * 2) - 1;
+      data_r[i] = (Math.random() * 2) - 1;
+  }
+}
+"/>
+ <declaration value="
+// block_$id$ = $label$
+var block_$id$ =  new WhiteNoise(context);
+$port[sound]$ = block_$id$.node;
+
+"/>
+ <properties/>
+ <ports>
+  <port conn_type="output" label="Sound" name_="sound" type_="mosaicode_lib_javascript_webaudio.extensions.ports.sound"/>
+ </ports>
+</MosaicodeBlock>

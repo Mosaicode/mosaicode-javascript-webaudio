@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="249:229:4:150" extension="webaudio" group="Logical Operations" help="Logical Operation NOT" label="NOT" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Logical Operations.not">
+ <onload value="
+"/>
+ <execution value="
+"/>
+ <declaration value="
+var condition$id$ = null;
+
+var $port[output]$ = [];
+
+function not$id$() {
+    var ret = !condition$id$;    
+    for (var i = 0; i &lt; $port[output]$.length ; i++){
+        $port[output]$[i](ret);
+    }
+    return true;
+}
+
+var $port[condition]$ = function(value){
+    condition$id$ = value;
+    not$id$();
+    return true;
+};
+"/>
+ <properties/>
+ <ports>
+  <port conn_type="input" label="Condition" name_="condition" type_="mosaicode_lib_javascript_webaudio.extensions.ports.bool"/>
+  <port conn_type="output" label="Output" name_="output" type_="mosaicode_lib_javascript_webaudio.extensions.ports.bool"/>
+ </ports>
+</MosaicodeBlock>

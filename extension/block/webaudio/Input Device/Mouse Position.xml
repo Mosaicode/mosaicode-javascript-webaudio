@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="50:50:50:150" extension="webaudio" group="Input Device" help="Mouse Position" label="Mouse Position" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Input Devices.mouseposition">
+ <function value="
+// ----------------- Mouse position ----------------------------
+// Detect if the browser is IE or not.
+// If it is not IE, we assume that the browser is NS.
+var IE = document.all?true:false
+
+// If NS -- that is, !IE -- then set up for mouse capture
+if (!IE) document.captureEvents(Event.MOUSEMOVE)
+
+// Set-up to use getMouseXY function onMouseMove
+document.onmousemove = getMouseXY;
+
+// Temporary variables to hold mouse x-y pos.s
+var tempX = 0
+var tempY = 0
+
+// Variable to keep output ports
+var x_ports = [];
+var y_ports = [];
+
+// Main function to retrieve mouse x-y pos.s
+
+function getMouseXY(e) {
+  if (IE) { // grab the x-y pos.s if browser is IE
+    tempX = event.clientX + document.body.scrollLeft
+    tempY = event.clientY + document.body.scrollTop
+  } else {  // grab the x-y pos.s if browser is NS
+    tempX = e.pageX
+    tempY = e.pageY
+  }
+  // catch possible negative values in NS4
+  if (tempX &lt; 0){tempX = 0}
+  if (tempY &lt; 0){tempY = 0}
+
+    // X value
+    for (var i = 0; i &lt; x_ports.length ; i++)
+        for (var j = 0; j &lt; x_ports[i].length ; j++)
+                x_ports[i][j](tempX);
+
+    // Y value
+    for (var i = 0; i &lt; y_ports.length ; i++)
+        for (var j = 0; j &lt; y_ports[i].length ; j++)
+                y_ports[i][j](tempY);
+  return true
+}
+// ----------------- Mouse position ----------------------------
+
+"/>
+ <declaration value="
+// block_$id$ = Mouse
+var $port[x]$ = [];
+var $port[y]$ = [];
+x_ports.push($port[x]$);
+y_ports.push($port[y]$);
+"/>
+ <properties/>
+ <ports>
+  <port conn_type="output" label="X" name_="x" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="output" label="Y" name_="y" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+ </ports>
+</MosaicodeBlock>

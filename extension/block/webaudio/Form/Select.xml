@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="50:150:250:150" extension="webaudio" group="Form" help="Select" label="Select" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Form.select">
+ <function value="
+function populateCombo(combo, text_values){
+        var values = text_values.split(',');
+        for (var i = 0 ; i &lt; values.length ; i++){
+            var c = document.createElement(&quot;option&quot;);
+            c.text = values[i];
+            combo.options.add(c, combo.options.length);
+        }
+        }
+"/>
+ <onload value="populateCombo(document.getElementById('block_$id$'), '$prop[values]$');"/>
+ <execution value='
+function change$id$(){
+    el = document.getElementById("block_$id$");
+    value = el.options[el.selectedIndex].value;
+    for (var i = 0; i &lt; $port[str_value]$.length ; i++){
+        $port[str_value]$[i](value);
+    }
+    for (var i = 0; i &lt; $port[float_value]$.length ; i++){
+        $port[float_value]$[i](el.selectedIndex);
+    }
+};
+'/>
+ <html value='
+$prop[label]$ &lt;select onchange="change$id$();" id="block_$id$"&gt;&lt;/select&gt;&lt;br&gt;
+'/>
+ <declaration value="
+// block_$id$ = $label$
+var $port[str_value]$ = [];
+var $port[float_value]$ = [];
+"/>
+ <properties>
+  <property value="{'type': 'String', 'name': 'label', 'value': 'Label', 'label': 'Label'}"/>
+  <property value="{'type': 'String', 'name': 'values', 'value': 'values', 'label': 'Values'}"/>
+ </properties>
+ <ports>
+  <port conn_type="output" label="String Value" name_="str_value" type_="mosaicode_lib_javascript_webaudio.extensions.ports.string"/>
+  <port conn_type="output" label="Float Value" name_="float_value" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+ </ports>
+</MosaicodeBlock>

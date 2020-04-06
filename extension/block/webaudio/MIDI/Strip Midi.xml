@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="250:250:0:150" extension="webaudio" group="MIDI" help="Strip Midi" label="Strip Midi" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.MIDI.stripmidi">
+ <declaration value="
+// block_$id$ = $label$
+var $port[note]$ = [];
+var $port[velocity]$ = [];
+
+var $port[midi_value]$ = function(value){
+    for (var i = 0; i &lt; $port[note]$.length ; i++){
+        $port[note]$[i](value[0]);
+    }
+    for (var i = 0; i &lt; $port[note]$.length ; i++){
+        $port[velocity]$[i](value[1]);
+    }
+    return true;
+    };
+"/>
+ <properties/>
+ <ports>
+  <port conn_type="input" label="Midi Value" name_="midi_value" type_="mosaicode_lib_javascript_webaudio.extensions.ports.midi"/>
+  <port conn_type="output" label="Note" name_="note" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="output" label="Velocity" name_="velocity" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+ </ports>
+</MosaicodeBlock>

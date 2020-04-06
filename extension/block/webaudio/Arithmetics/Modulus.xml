@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="200:200:25:150" extension="webaudio" group="Arithmetics" help="Modulus Operation (%)" label="Modulus" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Arithmetics.modulus">
+ <onload value="
+"/>
+ <execution value="
+"/>
+ <declaration value="
+var dividend$id$ = 0.0;
+var divisor$id$ = 1.0;
+        
+var $port[rest]$ = [];
+
+function modulus$id$() {
+    if (divisor$id$ === 0.0) {
+        divisor$id$ = 1.0;
+    }
+    
+    var rest = dividend$id$ % divisor$id$;
+    for (var i = 0; i &lt; $port[rest]$.length ; i++){
+        $port[rest]$[i](rest);
+    }
+    
+    return true;
+}
+
+var $port[dividend]$ = function(value){
+    dividend$id$ = Math.round(value);
+    modulus$id$();
+    return true;
+};
+
+var $port[divisor]$ = function(value){
+    divisor$id$ = Math.round(value);
+    modulus$id$();
+    return true;
+};
+"/>
+ <properties/>
+ <ports>
+  <port conn_type="input" label="Dividend" name_="dividend" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="input" label="Divisor" name_="divisor" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="output" label="Rest" name_="rest" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+ </ports>
+</MosaicodeBlock>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="249:229:4:150" extension="webaudio" group="Logical Operations" help="Logical Operation AND" label="AND" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Logical Operations.and">
+ <onload value="
+"/>
+ <execution value="
+"/>
+ <declaration value="
+var condition_1$id$ = null;
+var condition_2$id$ = null;
+
+var $port[output]$ = [];
+
+function and$id$() {
+    var ret = condition_1$id$ &amp;&amp; condition_2$id$;    
+    for (var i = 0; i &lt; $port[output]$.length ; i++){
+        $port[output]$[i](ret);
+    }
+    return true;
+}
+
+var $port[condition_1]$ = function(value){
+    condition_1$id$ = value;
+    and$id$();
+    return true;
+};
+
+var $port[condition_2]$ = function(value){
+    condition_2$id$ = value;
+    and$id$();
+    return true;
+};
+"/>
+ <properties/>
+ <ports>
+  <port conn_type="input" label="Condition 1" name_="condition_1" type_="mosaicode_lib_javascript_webaudio.extensions.ports.bool"/>
+  <port conn_type="input" label="Condition 2" name_="condition_2" type_="mosaicode_lib_javascript_webaudio.extensions.ports.bool"/>
+  <port conn_type="output" label="Output" name_="output" type_="mosaicode_lib_javascript_webaudio.extensions.ports.bool"/>
+ </ports>
+</MosaicodeBlock>

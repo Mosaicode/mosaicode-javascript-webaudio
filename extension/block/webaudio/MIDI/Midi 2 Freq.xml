@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="250:250:0:150" extension="webaudio" group="MIDI" help="midi to freq" label="Midi 2 Freq" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.MIDI.midi2freq">
+ <declaration value="
+// block_$id$ = $label$
+var $port[frequency]$ = [];
+
+var $port[midi_value]$ = function(value){
+    value = (value &lt; 0) ? 0 : value;
+    value = (value &gt;127) ? 127 : value;
+    var arg = ((parseFloat(value) - 69.0) / 12.0);
+    result =  Math.pow(2.0, arg) * 440.0;
+    for (var i = 0; i &lt; $port[frequency]$.length ; i++){
+        $port[frequency]$[i](result);
+    }
+    return true;
+    };
+"/>
+ <properties/>
+ <ports>
+  <port conn_type="input" label="Midi Value" name_="midi_value" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="output" label="Frequency" name_="frequency" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+ </ports>
+</MosaicodeBlock>

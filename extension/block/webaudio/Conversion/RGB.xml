@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="50:150:0:150" extension="webaudio" group="Conversion" help="Creates RGB Color" label="RGB" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Conversion.rgb">
+ <declaration value="
+// $label$
+var r$id$ = '00';
+var g$id$ = '00';
+var b$id$ = '00';
+var $port[result]$ = [];
+
+function update_backgroud_color$id$(){
+    result = '#' + r$id$ + g$id$ + b$id$;
+    for (var i = 0; i &lt; $port[result]$.length ; i++){
+        $port[result]$[i](result);
+    }
+}
+
+var $port[r]$ = function(value){
+    value = Math.round(value);
+    r$id$ = value.toString(16);
+    if (value &lt; 16)
+        r$id$ = '0'+ r$id$;
+    update_backgroud_color$id$();
+    return true;
+    };
+
+var $port[g]$ = function(value){
+    value = Math.round(value);
+    g$id$ = value.toString(16);
+    if (value &lt; 16)
+        g$id$ = '0'+ g$id$;
+    update_backgroud_color$id$();
+    return true;
+    };
+
+var $port[b]$ = function(value){
+    value = Math.round(value);
+    b$id$ = value.toString(16);
+    if (value &lt; 16)
+        b$id$ = '0'+ b$id$;
+    update_backgroud_color$id$();
+    return true;
+    };
+
+"/>
+ <properties/>
+ <ports>
+  <port conn_type="input" label="Red" name_="r" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="input" label="Green" name_="g" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="input" label="Blue" name_="b" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="output" label="Color" name_="result" type_="mosaicode_lib_javascript_webaudio.extensions.ports.color"/>
+ </ports>
+</MosaicodeBlock>

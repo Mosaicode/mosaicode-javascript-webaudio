@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="150:150:250:150" extension="webaudio" group="Input Device" help="Microphone" label="Microphone" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Input Devices.microphone">
+ <onload value=""/>
+ <declaration value="
+&lt;/script&gt;
+&lt;div&gt;
+    &lt;span class=&quot;title&quot;&gt;Microphone&lt;/span&gt;
+&lt;/div&gt;
+&lt;div&gt;
+    &lt;div&gt;
+        &lt;span class=&quot;label&quot;&gt;Gain&lt;/span&gt;
+        &lt;input type=&quot;range&quot; id=&quot;gain-slider_$id$&quot; class=&quot;slider&quot; min=&quot;-20&quot; max=&quot;20&quot; step=&quot;1&quot; value=&quot;0&quot; /&gt;
+        &lt;span id=&quot;gain-display_$id$&quot; class=&quot;label&quot;&gt;0 db&lt;/span&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var gain = 0;
+    var audioSource;
+    var block_$id$;
+
+    block_$id$  = context.createBiquadFilter();
+    block_$id$.type = &quot;lowshelf&quot;;
+    block_$id$.frequency.value = 1000;
+
+    var $port[output]$ = block_$id$;
+
+    navigator.getUserMedia =
+        navigator.getUserMedia ||
+        navigator.webkitGetUserMedia ||
+        navigator.mozGetUserMedia ||
+        navigator.msGetUserMedia;
+
+if (navigator.getUserMedia) {
+    navigator.getUserMedia (
+      {
+        audio: true,
+        video: false
+      },
+      function (stream) {
+        audioSource = context.createMediaStreamSource(stream);
+
+         var gainDisplay = document.getElementById('gain-display_$id$');
+         var gainSlider = document.getElementById('gain-slider_$id$');
+
+         gainSlider.addEventListener('input', function () {
+           gain = parseFloat(gainSlider.value)
+           gainDisplay.textContent = gain + ' db';
+           block_$id$.gain.value = gainSlider.value;
+         });
+
+         audioSource.connect(block_$id$);
+      },
+      function (err) {
+         console.log('Error initializing user media stream: ' + err);
+      }
+    );
+}
+"/>
+ <properties/>
+ <ports>
+  <port conn_type="output" label="Output" name_="output" type_="mosaicode_lib_javascript_webaudio.extensions.ports.sound"/>
+ </ports>
+</MosaicodeBlock>

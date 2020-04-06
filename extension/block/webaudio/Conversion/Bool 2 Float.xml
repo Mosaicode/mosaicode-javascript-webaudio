@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="200:200:25:150" extension="webaudio" group="Conversion" help="Bool to Float" label="Bool 2 Float" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Conversion.bool2float">
+ <declaration value="
+var $port[float_output]$ = [];
+var $port[bool_input]$ = function(value) {
+    var ret = value ? 1.0 : 0.0;
+    for (var i = 0; i &lt; $port[float_output]$.length ; i++){
+        $port[float_output]$[i](ret);
+    }
+    return true;
+};
+"/>
+ <properties/>
+ <ports>
+  <port conn_type="input" label="Bool Input" name_="bool_input" type_="mosaicode_lib_javascript_webaudio.extensions.ports.bool"/>
+  <port conn_type="output" label="Float Output" name_="float_output" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+ </ports>
+</MosaicodeBlock>

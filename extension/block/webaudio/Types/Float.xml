@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="150:50:150:150" extension="webaudio" group="Types" help="" label="Float" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Types.float">
+ <onload value="
+load_float$id$();
+        "/>
+ <declaration value="
+var $port[float_value]$ = [];
+
+function load_float$id$(){
+    for (var i = 0 ; i &lt; $port[float_value]$.length ; i++)
+        $port[float_value]$[i]($prop[float_value]$);
+};
+
+"/>
+ <properties>
+  <property value="{'type': 'Float', 'name': 'float_value', 'value': '0', 'label': 'Value'}"/>
+ </properties>
+ <ports>
+  <port conn_type="output" label="Value" name_="float_value" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+ </ports>
+</MosaicodeBlock>

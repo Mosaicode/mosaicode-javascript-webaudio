@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="50:150:250:150" extension="webaudio" group="Audio Filter" help=" Bandpass" label="Bandpass" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Audio Filter.bandpass">
+ <declaration value='
+// block_$id$ = $label$
+var block_$id$ = context.createBiquadFilter();
+block_$id$.type = "bandpass";
+
+var $port[freq]$ = function(value){
+    block_$id$.frequency = parseFloat(value);
+    return true;
+    };
+
+var $port[q]$ = function(value){
+    block_$id$.Q = parseFloat(value);
+    return true;
+    };
+
+var $port[sound_input]$ = block_$id$;
+var $port[output]$ = block_$id$;
+'/>
+ <properties/>
+ <ports>
+  <port conn_type="input" label="Sound" name_="sound_input" type_="mosaicode_lib_javascript_webaudio.extensions.ports.sound"/>
+  <port conn_type="input" label="Frequency" name_="freq" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="input" label="Q" name_="q" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="output" label="Sound" name_="output" type_="mosaicode_lib_javascript_webaudio.extensions.ports.sound"/>
+ </ports>
+</MosaicodeBlock>

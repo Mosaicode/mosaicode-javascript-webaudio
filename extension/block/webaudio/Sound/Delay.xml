@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="150:150:250:150" extension="webaudio" group="Sound" help="Delay" label="Delay" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Sound.delay">
+ <declaration value="
+// block_$id$ = Delay
+var block_$id$ = context.createDelay();
+block_$id$.delayTime.value = $prop[time]$;
+var $port[input]$ = block_$id$;
+var $port[output]$ = block_$id$;
+"/>
+ <properties>
+  <property value="{'upper': 10000, 'lower': 0, 'name': 'time', 'value': 1, 'label': 'Time', 'step': 1, 'type': 'Float'}"/>
+ </properties>
+ <ports>
+  <port conn_type="input" label="Input" name_="input" type_="mosaicode_lib_javascript_webaudio.extensions.ports.sound"/>
+  <port conn_type="output" label="Output" name_="output" type_="mosaicode_lib_javascript_webaudio.extensions.ports.sound"/>
+ </ports>
+</MosaicodeBlock>

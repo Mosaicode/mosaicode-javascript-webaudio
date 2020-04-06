@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="150:50:150:150" extension="webaudio" group="Types" help="" label="Point" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Types.point">
+ <onload value="
+load_point$id$();
+        "/>
+ <declaration value="
+var $port[point_value]$ = [];
+
+block_$id$_x = $prop[x]$;
+block_$id$_y = $prop[y]$;
+block_$id$_z = $prop[z]$;
+
+var $port[x]$ = function(value){
+    block_$id$_x = parseFloat(value);
+    load_point$id$();
+    return true;
+    };
+
+var $port[y]$ = function(value){
+    block_$id$_y = parseFloat(value);
+    load_point$id$();
+    return true;
+    }
+
+var $port[z]$ = function(value){
+    block_$id$_z = parseFloat(value);
+    load_point$id$();
+    return true;
+    }
+
+function load_point$id$(){
+    for (var i = 0 ; i &lt; $port[point_value]$.length ; i++)
+        $port[point_value]$[i]([block_$id$_x, block_$id$_y, block_$id$_z]);
+};
+
+"/>
+ <properties>
+  <property value="{'type': 'Float', 'name': 'x', 'value': '0', 'label': 'X'}"/>
+  <property value="{'type': 'Float', 'name': 'y', 'value': '0', 'label': 'Y'}"/>
+  <property value="{'type': 'Float', 'name': 'z', 'value': '0', 'label': 'Z'}"/>
+ </properties>
+ <ports>
+  <port conn_type="input" label="X" name_="x" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="input" label="Y" name_="y" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="input" label="Z" name_="z" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="output" label="Point Value" name_="point_value" type_="mosaicode_lib_javascript_webaudio.extensions.ports.point"/>
+ </ports>
+</MosaicodeBlock>

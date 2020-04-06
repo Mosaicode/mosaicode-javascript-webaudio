@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="50:50:50:150" extension="webaudio" group="Input Device" help="Device Orientation" label="Device Orientation" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Input Devices.deviceorientation">
+ <onload value="
+window.addEventListener('deviceorientation', handleDeviceOrientation$id$);
+                "/>
+ <declaration value="
+var $port[alpha]$ = [];
+var $port[beta]$ = [];
+var $port[gamma]$ = [];
+
+function handleDeviceOrientation$id$(event){
+    for (var i = 0 ; i &lt; $port[alpha]$.length ; i++)
+        $port[alpha]$[i](event.alpha);
+        
+    for (var i = 0 ; i &lt; $port[beta]$.length ; i++)
+        $port[beta]$[i](event.beta);
+        
+    for (var i = 0 ; i &lt; $port[gamma]$.length ; i++)
+        $port[gamma]$[i](event.gamma);                
+}      
+"/>
+ <properties/>
+ <ports>
+  <port conn_type="output" label="Alpha" name_="alpha" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="output" label="Beta" name_="beta" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="output" label="Gamma" name_="gamma" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+ </ports>
+</MosaicodeBlock>

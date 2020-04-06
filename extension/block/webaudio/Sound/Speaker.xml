@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="150:150:250:150" extension="webaudio" group="Sound" help="Sound output" label="Speaker" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Sound.speaker">
+ <declaration value="
+// block_$id$ = $label$
+var $port[sound]$ = context.destination;
+"/>
+ <properties/>
+ <ports>
+  <port conn_type="input" label="Sound" name_="sound" type_="mosaicode_lib_javascript_webaudio.extensions.ports.sound"/>
+ </ports>
+</MosaicodeBlock>

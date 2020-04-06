@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="50:50:50:150" extension="webaudio" group="Input Device" help="Mouse Click" label="Mouse Click" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Input Devices.mouseclick">
+ <function value="
+// ----------------- Mouse click ----------------------------
+// Variable to keep output ports
+var x_click_ports = [];
+var y_click_ports = [];
+var button_click_ports = [];
+
+document.onmousedown = getMouseClick;
+function getMouseClick(event) {
+    // X value
+    for (var i = 0; i &lt; x_click_ports.length ; i++)
+        for (var j = 0; j &lt; x_click_ports[i].length ; j++)
+                x_click_ports[i][j](event.x);
+
+    // Y value
+    for (var i = 0; i &lt; y_click_ports.length ; i++)
+        for (var j = 0; j &lt; y_click_ports[i].length ; j++)
+                y_click_ports[i][j](event.y);
+
+    // Button value
+    for (var i = 0; i &lt; button_click_ports.length ; i++)
+        for (var j = 0; j &lt; button_click_ports[i].length ; j++)
+                button_click_ports[i][j](event.button);
+
+  return true
+}
+// ----------------- Mouse position ----------------------------
+
+"/>
+ <declaration value="
+// block_$id$ = Mouse
+var $port[x]$ = [];
+var $port[y]$ = [];
+var $port[button]$ = [];
+x_click_ports.push($port[x]$);
+y_click_ports.push($port[y]$);
+button_click_ports.push($port[button]$);
+"/>
+ <properties/>
+ <ports>
+  <port conn_type="output" label="X" name_="x" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="output" label="Y" name_="y" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="output" label="Button" name_="button" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+ </ports>
+</MosaicodeBlock>

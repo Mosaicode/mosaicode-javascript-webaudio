@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="150:10:20:150" extension="webaudio" group="Input Device" help="Hour" label="Hour" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Input Devices.hour">
+ <declaration value="
+// block_$id$ = $label$
+var $port[hour]$ = [];
+var $port[minute]$ = [];
+var $port[second]$ = [];
+var $port[millisecond]$ = [];
+var $port[time]$ = [];
+
+var $port[generate]$ = function(value){
+    var d = new Date();
+    for (var i = 0; i &lt; $port[hour]$.length ; i++){
+        $port[hour]$[i](d.getHours());
+    }
+    for (var i = 0; i &lt; $port[minute]$.length ; i++){
+        $port[minute]$[i](d.getMinutes());
+    }
+    for (var i = 0; i &lt; $port[second]$.length ; i++){
+        $port[second]$[i](d.getSeconds());
+    }
+    for (var i = 0; i &lt; $port[millisecond]$.length ; i++){
+        $port[millisecond]$[i](d.getMilliseconds());
+    }
+    for (var i = 0; i &lt; $port[time]$.length ; i++){
+        $port[time]$[i](d.getTime());
+    }
+    return true;
+    };
+
+"/>
+ <properties/>
+ <ports>
+  <port conn_type="output" label="Hour" name_="hour" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="output" label="Minute" name_="minute" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="output" label="Second" name_="second" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="output" label="Millisecond" name_="millisecond" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="output" label="Time" name_="time" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="input" label="Generate" name_="generate" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+ </ports>
+</MosaicodeBlock>

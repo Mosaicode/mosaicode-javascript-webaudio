@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="150:150:250:150" extension="webaudio" group="Interface" help="Random" label="Random" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Interface.random">
+ <declaration value="
+// block_$id$ = $label$
+var block_$id$_min = $prop[min]$;
+var block_$id$_max = $prop[max]$;
+var $port[float]$ = [];
+
+var $port[generate]$ = function(value){
+    value = Math.floor((Math.random() * (block_$id$_max - block_$id$_min)) + block_$id$_min);
+    for (var i = 0; i &lt; $port[float]$.length ; i++){
+        $port[float]$[i](value);
+    }
+    return true;
+    };
+
+"/>
+ <properties>
+  <property value="{'upper': 20000, 'lower': -20000, 'name': 'min', 'value': 1, 'label': 'Min', 'step': 1, 'type': 'Float'}"/>
+  <property value="{'upper': 20000, 'lower': -20000, 'name': 'max', 'value': 100, 'label': 'Max', 'step': 1, 'type': 'Float'}"/>
+ </properties>
+ <ports>
+  <port conn_type="output" label="Float" name_="float" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="input" label="Generate" name_="generate" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+ </ports>
+</MosaicodeBlock>

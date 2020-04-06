@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="50:150:250:150" extension="webaudio" group="Form" help="Check" label="Check" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Form.check">
+ <execution value='
+function change_value$id$(e){
+    value = document.getElementById("block_$id$").checked;
+    for (var i = 0; i &lt; $port[value]$.length ; i++){
+        if (value)
+            $port[value]$[i](1);
+        else
+            $port[value]$[i](0);
+    }
+};
+'/>
+ <html value='
+&lt;input type="checkbox" onchange="change_value$id$(event);" id="block_$id$"&gt; $prop[label]$ &lt;br&gt;
+'/>
+ <declaration value='
+// block_$id$ = $label$
+var $port[value]$ = [];
+
+var $port[invalue]$ = function(value){
+    if (value)
+    document.getElementById("block_$id$").checked = true;
+    else
+    document.getElementById("block_$id$").checked = false;
+    return true;
+    };
+
+'/>
+ <properties>
+  <property value="{'type': 'Float', 'name': 'value', 'value': '0', 'label': 'Value'}"/>
+  <property value="{'type': 'String', 'name': 'label', 'value': 'Label', 'label': 'Label'}"/>
+ </properties>
+ <ports>
+  <port conn_type="output" label="Value" name_="value" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="input" label="Value" name_="invalue" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+ </ports>
+</MosaicodeBlock>

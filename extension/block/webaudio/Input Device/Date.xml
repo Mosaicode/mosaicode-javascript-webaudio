@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="150:10:20:150" extension="webaudio" group="Input Device" help="Date" label="Date" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Input Devices.date">
+ <declaration value="
+// block_$id$ = $label$
+var $port[day]$ = [];
+var $port[month]$ = [];
+var $port[year]$ = [];
+
+var $port[generate]$ = function(value){
+    var d = new Date();
+    for (var i = 0; i &lt; $port[day]$.length ; i++){
+        $port[day]$[i](d.getDate());
+    }
+    for (var i = 0; i &lt; $port[month]$.length ; i++){
+        $port[month]$[i](d.getMonth());
+    }
+    for (var i = 0; i &lt; $port[year]$.length ; i++){
+        $port[year]$[i](d.getFullYear());
+    }
+    return true;
+    };
+
+"/>
+ <properties/>
+ <ports>
+  <port conn_type="output" label="Day" name_="day" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="output" label="Month" name_="month" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="output" label="Year" name_="year" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="input" label="Generate" name_="generate" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+ </ports>
+</MosaicodeBlock>

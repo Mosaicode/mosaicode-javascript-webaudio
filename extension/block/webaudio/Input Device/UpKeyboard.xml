@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="50:150:250:150" extension="webaudio" group="Input Device" help="UpKeyboard" label="UpKeyboard" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.Input Devices.upkeyboard">
+ <function value="
+var keyboard_char_output = [];
+var keyboard_float_output = [];
+document.onkeyup = function(evt){
+    evt = evt || window.event;
+
+    var value = evt.keyCode || evt.which;
+    for (var i = 0; i &lt; keyboard_float_output.length ; i++)
+        for (var j = 0; j &lt; keyboard_float_output[i].length ; j++)
+                keyboard_float_output[i][j](value);
+
+    value = String.fromCharCode(value);
+    for (var i = 0; i &lt; keyboard_char_output.length ; i++)
+        for (var j = 0; j &lt; keyboard_char_output[i].length ; j++)
+                keyboard_char_output[i][j](value);
+};
+"/>
+ <declaration value="
+// block_$id$ = KeyBoard Input
+var $port[char_output]$ = [];
+var $port[float_output]$ = [];
+keyboard_char_output.push($port[char_output]$);
+keyboard_float_output.push($port[float_output]$);
+"/>
+ <properties/>
+ <ports>
+  <port conn_type="output" label="Float Output" name_="float_output" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="output" label="Char Output" name_="char_output" type_="mosaicode_lib_javascript_webaudio.extensions.ports.char"/>
+ </ports>
+</MosaicodeBlock>

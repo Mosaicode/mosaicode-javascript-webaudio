@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="150:050:050:150" extension="webaudio" group="GUI" help="Sine Wave" label="Sine Wave" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.GUI.sinewave">
+ <onload value="draw_sinewave$id$();"/>
+ <execution value="
+function draw_sinewave$id$(){
+    var canvas = document.getElementById(&quot;canvas$id$&quot;);
+    var canvasCtx = canvas.getContext(&quot;2d&quot;);
+    var bufferLength = 64;
+    var dataArray = new Uint8Array(bufferLength);
+
+    canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+    canvasCtx.lineWidth = 2;
+    canvasCtx.strokeStyle = 'rgb(0, 0, 0)';
+
+      block_$id$.getByteTimeDomainData(dataArray);
+
+      canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+      canvasCtx.beginPath();
+
+      var sliceWidth = canvas.width * 1.0 / bufferLength;
+      var x = 0;
+
+      for(var i = 0; i &lt; bufferLength; i++) {
+
+        var v = dataArray[i] / 128.0;
+        var y = v * canvas.height/2;
+
+        if(i === 0) {
+          canvasCtx.moveTo(x, y);
+        } else {
+          canvasCtx.lineTo(x, y);
+        }
+
+        x += sliceWidth;
+      }
+
+      canvasCtx.stroke();
+      drawVisual = requestAnimationFrame(draw_sinewave$id$);
+}
+"/>
+ <html value='
+&lt;canvas id="canvas$id$" class="visualizer" width="$prop[width]$" height="$prop[height]$"&gt;&lt;/canvas&gt;
+'/>
+ <declaration value="
+// block_$id$ = $label$
+var block_$id$ = context.createAnalyser();
+var $port[input]$ = block_$id$;
+"/>
+ <properties>
+  <property value="{'upper': 32000, 'lower': 0, 'name': 'width', 'value': 640, 'label': 'Width', 'type': 'Float'}"/>
+  <property value="{'upper': 32000, 'lower': 0, 'name': 'height', 'value': 240, 'label': 'Height', 'type': 'Float'}"/>
+ </properties>
+ <ports>
+  <port conn_type="input" label="Sound" name_="input" type_="mosaicode_lib_javascript_webaudio.extensions.ports.sound"/>
+ </ports>
+</MosaicodeBlock>

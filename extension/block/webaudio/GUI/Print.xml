@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MosaicodeBlock color="50:150:250:150" extension="webaudio" group="GUI" help="Print value" label="Print" language="javascript" type="mosaicode_lib_javascript_webaudio.extensions.blocks.GUI.print">
+ <html value='
+$prop[label]$ &lt;span id="block_$id$"&gt;&lt;/span&gt;&lt;br&gt;
+'/>
+ <declaration value='
+// $label$
+var $port[float_value]$ = function(value){
+    document.getElementById("block_$id$").innerHTML = value;
+    return true;
+    };
+
+var $port[char_value]$ = function(value){
+    document.getElementById("block_$id$").innerHTML = value;
+    return true;
+    };
+
+var $port[color_value]$ = function(value){
+    document.getElementById("block_$id$").innerHTML = value;
+    return true;
+    };
+
+var $port[string_value]$ = function(value){
+    document.getElementById("block_$id$").innerHTML = value;
+    return true;
+    };
+
+var $port[point_value]$ = function(value){
+    document.getElementById("block_$id$").innerHTML = "("+value+")";
+    return true;
+    };
+    
+var $port[bool_value]$ = function(value){
+    document.getElementById("block_$id$").innerHTML = "("+value+")";
+    return true;
+    };    
+'/>
+ <properties>
+  <property value="{'type': 'String', 'name': 'label', 'value': 'Label', 'label': 'Label'}"/>
+ </properties>
+ <ports>
+  <port conn_type="input" label="Float Value" name_="float_value" type_="mosaicode_lib_javascript_webaudio.extensions.ports.float"/>
+  <port conn_type="input" label="Char Value" name_="char_value" type_="mosaicode_lib_javascript_webaudio.extensions.ports.char"/>
+  <port conn_type="input" label="Color Value" name_="color_value" type_="mosaicode_lib_javascript_webaudio.extensions.ports.color"/>
+  <port conn_type="input" label="String Value" name_="string_value" type_="mosaicode_lib_javascript_webaudio.extensions.ports.string"/>
+  <port conn_type="input" label="Point Value" name_="point_value" type_="mosaicode_lib_javascript_webaudio.extensions.ports.point"/>
+  <port conn_type="input" label="Bool Value" name_="bool_value" type_="mosaicode_lib_javascript_webaudio.extensions.ports.bool"/>
+ </ports>
+</MosaicodeBlock>
